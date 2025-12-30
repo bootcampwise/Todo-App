@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "TaskiApp",
-    "slug": "todotaskiapp",
+    "slug": "taski-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,8 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taskiapp",
-      "googleServicesFile": "./google-services.json",
+      "package": "com.faizan_maan.taskiapp",
       "permissions": [
         "android.permission.SCHEDULE_EXACT_ALARM",
         "android.permission.USE_EXACT_ALARM",
@@ -33,25 +32,15 @@
       ]
     },
     "plugins": [
-      "expo-notifications",
-      "@react-native-firebase/app",
-      "@react-native-google-signin/google-signin",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "minSdkVersion": 24
-          }
-        }
-      ]
+      "expo-notifications"
     ],
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "king_khan",
+    "owner": "faizan_maan",
     "extra": {
       "eas": {
-        "projectId": "20f0c578-b1db-489f-857e-a2e1bc8cc59f"
+        "projectId": "7eb822d8-cd7c-45f7-a0b7-66cc42db4e51"
       }
     }
   }

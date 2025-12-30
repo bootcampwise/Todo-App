@@ -6,7 +6,6 @@ import {
     ActivityIndicator,
     ViewStyle,
     TextStyle,
-    View,
 } from 'react-native';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../constants/theme';
 
@@ -18,7 +17,6 @@ interface ButtonProps {
     loading?: boolean;
     style?: ViewStyle;
     textStyle?: TextStyle;
-    icon?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,7 +27,6 @@ const Button: React.FC<ButtonProps> = ({
     loading = false,
     style,
     textStyle,
-    icon,
 }) => {
     const getButtonStyle = () => {
         switch (variant) {
@@ -65,10 +62,7 @@ const Button: React.FC<ButtonProps> = ({
                     color={variant === 'outline' ? COLORS.light.primary : COLORS.light.background}
                 />
             ) : (
-                <View style={styles.contentContainer}>
-                    {icon}
-                    <Text style={[getTextStyle(), textStyle]}>{title}</Text>
-                </View>
+                <Text style={[getTextStyle(), textStyle]}>{title}</Text>
             )}
         </TouchableOpacity>
     );
@@ -81,11 +75,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: 48,
-    },
-    contentContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     buttonPrimary: {
         backgroundColor: COLORS.light.primary,
