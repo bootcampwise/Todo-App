@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "TaskiApp",
-    "slug": "taski-app",
+    "slug": "todotaskiapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.king_khan.todotaskiapp",
+      "package": "com.king_khan.todo_taskiapp",
       "permissions": [
         "android.permission.SCHEDULE_EXACT_ALARM",
         "android.permission.USE_EXACT_ALARM",
