@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.faizan_maan.taskiapp",
+      "package": "com.king_khan.todotaskiapp",
       "permissions": [
         "android.permission.SCHEDULE_EXACT_ALARM",
         "android.permission.USE_EXACT_ALARM",
@@ -37,10 +37,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "faizan_maan",
+    "owner": "king_khan",
     "extra": {
       "eas": {
-        "projectId": "7eb822d8-cd7c-45f7-a0b7-66cc42db4e51"
+        "projectId": "20f0c578-b1db-489f-857e-a2e1bc8cc59f"
       }
     }
   }
