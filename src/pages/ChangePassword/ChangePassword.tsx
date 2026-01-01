@@ -30,7 +30,6 @@ const ChangePassword: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChangePassword = async () => {
-        // Validation
         if (!oldPassword || !newPassword || !confirmPassword) {
             Alert.alert('Error', 'Please fill in all fields');
             return;
@@ -59,11 +58,9 @@ const ChangePassword: React.FC = () => {
                 return;
             }
 
-            // Re-authenticate user with old password
             const credential = EmailAuthProvider.credential(user.email, oldPassword);
             await reauthenticateWithCredential(user, credential);
 
-            // Update to new password
             await updatePassword(user, newPassword);
 
             Alert.alert('Success', 'Password changed successfully!', [

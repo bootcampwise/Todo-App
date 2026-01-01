@@ -6,7 +6,6 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBbrkIR2ESmgRbzfjSWkBehjEYOpCupAzU",
   authDomain: "taski-app-786.firebaseapp.com",
@@ -17,7 +16,6 @@ const firebaseConfig = {
   measurementId: "G-GFBV9SVSWB"
 };
 
-// Initialize Firebase
 let app;
 if (getApps().length === 0) {
   app = initializeApp(firebaseConfig);
@@ -25,7 +23,6 @@ if (getApps().length === 0) {
   app = getApp();
 }
 
-// Initialize Auth with persistence
 let auth;
 try {
   if (typeof getReactNativePersistence === 'function') {

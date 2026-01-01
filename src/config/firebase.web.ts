@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBbrkIR2ESmgRbzfjSWkBehjEYOpCupAzU",
   authDomain: "taski-app-786.firebaseapp.com",
@@ -13,7 +12,6 @@ const firebaseConfig = {
   measurementId: "G-GFBV9SVSWB"
 };
 
-// Initialize Firebase for web
 const app = initializeApp(firebaseConfig);
 
 

@@ -25,7 +25,6 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  // Text styles
   heading1: {
     fontSize: TYPOGRAPHY.fontSize.xxxl,
     fontWeight: TYPOGRAPHY.fontWeight.bold,

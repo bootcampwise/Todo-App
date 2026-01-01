@@ -55,13 +55,11 @@ const Login: React.FC = () => {
             return;
         }
 
-        // Validate password length BEFORE calling Firebase
         if (isSignUp && password.length < 6) {
             Alert.alert('Error', 'Password should be at least 6 characters.');
             return;
         }
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             Alert.alert('Error', 'Please enter a valid email address.');
@@ -92,7 +90,6 @@ const Login: React.FC = () => {
                     });
                     console.log('User data saved successfully!');
 
-                    // Verify data was saved
                     console.log('Verifying data save...');
                     const docSnap = await getDoc(doc(firebaseFirestore(), 'users', userCredential.user.uid));
                     if (docSnap.exists()) {

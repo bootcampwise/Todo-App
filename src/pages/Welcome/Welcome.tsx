@@ -55,10 +55,8 @@ const Welcome: React.FC = () => {
                 throw new Error('No ID token found');
             }
 
-            // Build a Firebase credential with the Google ID token
             const googleCredential = GoogleAuthProvider.credential(idToken);
 
-            // Sign in the user with the credential in Firebase
             await signInWithCredential(auth, googleCredential);
             console.log('Signed in with Google successfully!');
 

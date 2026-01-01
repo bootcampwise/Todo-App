@@ -33,7 +33,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate || null);
 
-    // Time state
     const [selectedHour, setSelectedHour] = useState(9);
     const [selectedMinute, setSelectedMinute] = useState(0);
     const [selectedAmPm, setSelectedAmPm] = useState<AmPm>('AM');
@@ -41,14 +40,13 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
     useEffect(() => {
         if (visible) {
             setMode('date');
-            // Initialize time from initialDate or default to current time
             const now = new Date();
             const timeSource = initialDate || now;
             let hours = timeSource.getHours();
             const minutes = timeSource.getMinutes();
             const ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
+            hours = hours ? hours : 12;
             setSelectedHour(hours);
             setSelectedMinute(Math.ceil(minutes / 5) * 5 % 60); // Round to nearest 5 mins
             setSelectedAmPm(ampm);
@@ -70,7 +68,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
     };
 
     const getFirstDayOfMonth = (year: number, month: number) => {
-        // Adjust to make Monday 0, Sunday 6
         const day = new Date(year, month, 1).getDay();
         return day === 0 ? 6 : day - 1;
     };
@@ -79,7 +76,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         const newDate = new Date(currentDate);
         newDate.setMonth(newDate.getMonth() + increment);
 
-        // Prevent going to past months
         const now = new Date();
         const minDate = new Date(now.getFullYear(), now.getMonth(), 1);
         if (newDate < minDate) return;
@@ -101,7 +97,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         } else {
             let newMinute = selectedMinute + increment;
             if (newMinute > 59) newMinute = 0;
-            if (newMinute < 0) newMinute = 55; // Step is 5, so wrap to 55
+            if (newMinute < 0) newMinute = 55;
             setSelectedMinute(newMinute);
         }
     };
@@ -132,7 +128,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
             finalDate.setSeconds(0);
 
             if (finalDate < new Date()) {
-                // If the time is in the past, adjust to current time + 1 min
                 const now = new Date();
                 finalDate.setTime(now.getTime() + 60000);
             }
@@ -149,12 +144,9 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         const firstDay = getFirstDayOfMonth(year, month);
         const days = [];
 
-        // Empty slots for previous month
         for (let i = 0; i < firstDay; i++) {
             days.push(<View key={`empty-${i}`} style={styles.dayCell} />);
         }
-
-        // Days of the month
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -264,7 +256,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
 
                         {mode === 'date' ? (
                             <>
-                                {/* Month Navigation */}
                                 <View style={styles.monthNav}>
                                     <TouchableOpacity onPress={() => changeMonth(-1)}>
                                         <Ionicons name="chevron-back" size={20} color={COLORS.light.textSecondary} />
@@ -277,14 +268,12 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
                                     </TouchableOpacity>
                                 </View>
 
-                                {/* Week Days Header */}
                                 <View style={styles.weekDaysRow}>
                                     {weekDays.map((day, index) => (
                                         <Text key={index} style={styles.weekDayText}>{day}</Text>
                                     ))}
                                 </View>
 
-                                {/* Calendar Grid */}
                                 <View style={styles.calendarGrid}>
                                     {renderCalendarDays()}
                                 </View>
@@ -293,7 +282,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
                             renderTimePicker()
                         )}
 
-                        {/* Selected Date Display */}
                         <Text style={styles.selectedDateDisplay}>
                             {selectedDate
                                 ? selectedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -301,7 +289,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
                             {mode === 'time' && ` at ${selectedHour}:${selectedMinute.toString().padStart(2, '0')} ${selectedAmPm}`}
                         </Text>
 
-                        {/* Action Buttons */}
                         {mode === 'date' ? (
                             <TouchableOpacity
                                 style={[styles.confirmButton, !selectedDate && styles.confirmButtonDisabled]}
@@ -348,7 +335,7 @@ const styles = StyleSheet.create({
     headerRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center', // Center title, back button absolute or flex
+        justifyContent: 'center',
         marginBottom: SPACING.lg,
         position: 'relative',
     },
@@ -404,7 +391,7 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     selectedDayCell: {
-        backgroundColor: '#8BC34A', // Light Green
+        backgroundColor: '#8BC34A',
         borderRadius: 8,
     },
     dayText: {
@@ -430,7 +417,7 @@ const styles = StyleSheet.create({
         marginTop: SPACING.sm,
     },
     confirmButton: {
-        backgroundColor: '#8BC34A', // Light Green
+        backgroundColor: '#8BC34A',
         paddingVertical: 16,
         borderRadius: BORDER_RADIUS.md,
         alignItems: 'center',
@@ -443,7 +430,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    // Time Picker Styles
     timePickerContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -470,7 +456,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: 'bold',
         color: COLORS.light.text,
-        marginTop: 10, // Adjust for alignment
+        marginTop: 10,
     },
     ampmButton: {
         paddingVertical: 4,

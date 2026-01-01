@@ -76,7 +76,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
                 onPress={onPress}
                 activeOpacity={0.9}
             >
-                {/* Header: Title + Menu */}
                 <View style={styles.header}>
                     <Text
                         style={[
@@ -96,7 +95,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     </TouchableOpacity>
                 </View>
 
-                {/* Date */}
                 {task.remindAt ? (
                     <Text style={styles.dateText}>
                         {formatReminder(task.remindAt)}
@@ -105,7 +103,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     <Text style={styles.dateText}>No Date</Text>
                 )}
 
-                {/* Notes */}
                 {task.notes ? (
                     <Text
                         style={[styles.notes, task.completed && styles.notesCompleted]}
@@ -115,7 +112,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
                     </Text>
                 ) : null}
 
-                {/* Tag & Complete Button */}
                 <View style={styles.footerContainer}>
                     <View style={[styles.tag, { backgroundColor: tagColor }]}>
                         <Text style={styles.tagText}>
@@ -137,7 +133,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
                 </View>
             </TouchableOpacity>
 
-            {/* Popup Menu Modal */}
             <Modal
                 visible={menuVisible}
                 transparent
@@ -154,7 +149,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
                         {
                             position: 'absolute',
                             top: menuPosition.top,
-                            right: menuPosition.right + SPACING.md, // Add some margin from edge
+                            right: menuPosition.right + SPACING.md,
                         }
                     ]}>
                         {!task.completed && (

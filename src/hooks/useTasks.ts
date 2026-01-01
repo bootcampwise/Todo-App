@@ -79,7 +79,6 @@ export const useTasks = () => {
     return () => unsubscribe();
   }, [user, dispatch]);
 
-  // Add a new task
   const addTask = async (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'userId'>) => {
     if (!user) return;
 
@@ -116,7 +115,6 @@ export const useTasks = () => {
     }
   };
 
-  // Update an existing task
   const updateTask = async (taskId: string, updates: Partial<Task>) => {
     try {
       const now = new Date();
@@ -144,7 +142,6 @@ export const useTasks = () => {
 
         dispatch(updateTaskAction(updatedTask));
 
-        // Update notification
         if (updatedTask.remindAt && !updatedTask.completed) {
           NotificationService.scheduleTaskNotification(updatedTask);
         } else {
@@ -157,7 +154,6 @@ export const useTasks = () => {
     }
   };
 
-  // Delete a task
   const deleteTask = async (taskId: string) => {
     console.log('useTasks: deleteTask called for', taskId);
     try {
@@ -180,20 +176,17 @@ export const useTasks = () => {
 
     try {
       const now = new Date();
-      // Optimistic update
       dispatch(toggleCompleteAction({
         id: taskId,
         updatedAt: now.toISOString(),
       }));
 
       if (task.completed && task.remindAt) {
-        // If it was completed, and now we toggled it back to incomplete
         NotificationService.scheduleTaskNotification({
           ...task,
           completed: false,
         });
       } else {
-        // If it was incomplete, and now we toggled it to complete
         NotificationService.cancelTaskNotification(taskId);
       }
 

@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { firebaseAuth, firebaseFirestore } from '../config/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { setUser, setLoading } from '../store/authSlice';
 import type { RootState } from '../store';
@@ -35,7 +35,7 @@ const AppNavigator: React.FC = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(firebaseAuth(), async (user: any) => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth(), async (user: User | null) => {
             if (user) {
                 try {
                     const userDocRef = doc(firebaseFirestore(), 'users', user.uid);
