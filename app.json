@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TaskiApp",
-    "slug": "todotaskiapp",
+    "name": "taski_todoapp",
+    "slug": "taskitodoapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -38,10 +38,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "king_khan",
+    "owner": "taskiapp",
     "extra": {
       "eas": {
-        "projectId": "20f0c578-b1db-489f-857e-a2e1bc8cc59f"
+        "projectId": "2e64dc1c-7fa2-471b-a3fb-87df58ac8f35"
       }
     }
   }
