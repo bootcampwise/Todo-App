@@ -23,12 +23,14 @@ const EditProfile = () => {
         fullName,
         setFullName,
         email,
+        setEmail,
         image,
         isLoading,
         pickImage,
         handleSaveChanges,
         user,
     } = useEditProfile();
+
 
     return (
         <SafeAreaView style={globalStyles.container}>

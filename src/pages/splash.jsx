@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { useSplash } from '../hooks/useSplash';
 import { styles } from '../styles/pages/splashStyles';
+import { IMAGES } from '../styles/images';
+
 
 const Splash = ({ onFinish }) => {
     const { isDarkMode } = useSplash(onFinish);
@@ -15,10 +17,11 @@ const Splash = ({ onFinish }) => {
                 },
             ]}>
             <Image
-                source={require('../assets/logo.png')}
+                source={IMAGES.LOGO}
                 style={styles.logo}
                 resizeMode="contain"
             />
+
         </View>
     );
 };

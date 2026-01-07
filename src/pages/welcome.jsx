@@ -5,6 +5,8 @@ import { useWelcome } from '../hooks/useWelcome';
 import Button from '../components/button/Button';
 import { globalStyles } from '../styles/globalStyles';
 import { styles } from '../styles/pages/welcomeStyles';
+import { IMAGES } from '../styles/images';
+
 
 const Welcome = () => {
     const { handleLogin, handleRegister, signInWithGoogle } = useWelcome();
@@ -14,18 +16,20 @@ const Welcome = () => {
             <View style={styles.content}>
                 <View style={styles.logoContainer}>
                     <Image
-                        source={require('../assets/logo.png')}
+                        source={IMAGES.LOGO}
                         style={styles.logo}
                         resizeMode="contain"
                     />
+
                 </View>
 
                 <View style={styles.illustrationContainer}>
                     <Image
-                        source={require('../assets/welcome_illustration.png')}
+                        source={IMAGES.WELCOME_ILLUSTRATION}
                         style={styles.illustration}
                         resizeMode="contain"
                     />
+
                 </View>
 
                 <View style={styles.textContainer}>

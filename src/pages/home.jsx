@@ -18,6 +18,8 @@ import { globalStyles } from '../styles/globalStyles';
 import { Ionicons, Octicons } from '@expo/vector-icons';
 import CustomDatePicker from '../components/customDatePicker/CustomDatePicker';
 import { Shadow } from 'react-native-shadow-2';
+import { IMAGES } from '../styles/images';
+
 
 const Home = () => {
     const navigation = useNavigation();
@@ -52,10 +54,11 @@ const Home = () => {
         <View style={styles.emptyState}>
             <View style={styles.illustration}>
                 <Image
-                    source={require('../assets/empty_state.png')}
+                    source={IMAGES.EMPTY_STATE}
                     style={styles.emptyStateImage}
                     resizeMode="contain"
                 />
+
             </View>
             <Text style={styles.emptyStateTitle}>No Task</Text>
             <Text style={styles.emptyStateSubtitle}>
@@ -82,10 +85,11 @@ const Home = () => {
                         <Text style={styles.selectionTitle}>{selectedTasks.length} Selected</Text>
                     ) : (
                         <Image
-                            source={require('../assets/taski_logo.png')}
+                            source={IMAGES.TASKI_LOGO}
                             style={styles.logoImage}
                             resizeMode="contain"
                         />
+
                     )}
                 </View>
 
