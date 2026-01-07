@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { firebaseAuth, firebaseFirestore } from '../config/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { setUser, setLoading } from '../store/authSlice';
-import type { RootState } from '../store';
-import Splash from '../pages/Splash/Splash';
-import Welcome from '../pages/Welcome/Welcome';
-import Login from '../pages/Login/Login';
-import Home from '../pages/Home/Home';
-import TaskDetails from '../pages/TaskDetails/TaskDetails';
-import Settings from '../pages/Settings/Settings';
-import EditProfile from '../pages/EditProfile/EditProfile';
-import ChangePassword from '../pages/ChangePassword/ChangePassword';
+import Splash from '../pages/splash';
+import Welcome from '../pages/welcome';
+import Login from '../pages/login';
+import Home from '../pages/home';
+import TaskDetails from '../pages/taskDetails';
+import Settings from '../pages/settings';
+import EditProfile from '../pages/editProfile';
+import ChangePassword from '../pages/changePassword';
 
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => {
-    const dispatch = useDispatch();
-    const { isAuthenticated, isLoading, isRegistering } = useSelector(
-        (state: RootState) => state.auth,
+    const dispatch = useAppDispatch();
+    const { isAuthenticated, isLoading, isRegistering } = useAppSelector(
+        (state) => state.auth,
     );
     const [showSplash, setShowSplash] = useState(true);
-    const wasAuthenticated = React.useRef(false);
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            wasAuthenticated.current = true;
-        }
-    }, [isAuthenticated]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth(), async (user: User | null) => {
@@ -54,7 +46,6 @@ const AppNavigator: React.FC = () => {
                         dispatch(setUser(user));
                     }
                 } catch (error) {
-                    console.error('Error loading profile from Firestore:', error);
                     dispatch(setUser(user));
                 }
             } else {
@@ -81,17 +72,8 @@ const AppNavigator: React.FC = () => {
                 }}>
                 {!isAuthenticated || isRegistering ? (
                     <Stack.Group screenOptions={{ headerShown: false }}>
-                        {wasAuthenticated.current ? (
-                            <>
-                                <Stack.Screen name="Welcome" component={Welcome} />
-                                <Stack.Screen name="Login" component={Login} />
-                            </>
-                        ) : (
-                            <>
-                                <Stack.Screen name="Welcome" component={Welcome} />
-                                <Stack.Screen name="Login" component={Login} />
-                            </>
-                        )}
+                        <Stack.Screen name="Welcome" component={Welcome} />
+                        <Stack.Screen name="Login" component={Login} />
                     </Stack.Group>
                 ) : (
                     <>

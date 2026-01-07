@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { store } from './src/store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
-import NotificationService from './src/services/NotificationService';
+import NotificationService from './src/services/notificationService';
 
 const App: React.FC = () => {
     useEffect(() => {

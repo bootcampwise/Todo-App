@@ -4,16 +4,17 @@ import { getAuth, initializeAuth } from 'firebase/auth';
 import { getReactNativePersistence } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { Platform } from 'react-native';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBbrkIR2ESmgRbzfjSWkBehjEYOpCupAzU",
-  authDomain: "taski-app-786.firebaseapp.com",
-  projectId: "taski-app-786",
-  storageBucket: "taski-app-786.firebasestorage.app",
-  messagingSenderId: "25460966938",
-  appId: "1:25460966938:web:03ac08e5def58602f173a3",
-  measurementId: "G-GFBV9SVSWB"
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 let app;
@@ -25,7 +26,8 @@ if (getApps().length === 0) {
 
 let auth;
 try {
-  if (typeof getReactNativePersistence === 'function') {
+  const isWeb = Platform.OS === 'web';
+  if (!isWeb && typeof getReactNativePersistence === 'function') {
     auth = initializeAuth(app, {
       persistence: getReactNativePersistence(ReactNativeAsyncStorage)
     });

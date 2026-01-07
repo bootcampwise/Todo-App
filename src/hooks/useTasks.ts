@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {firebaseFirestore} from '../config/firebase';
 import {
   collection,
@@ -24,14 +24,14 @@ import {
 } from '../store/taskSlice';
 import type {Task} from '../store/taskSlice';
 import type {RootState, AppDispatch} from '../store';
-import NotificationService from '../services/NotificationService';
+import NotificationService from '../services/notificationService';
 
 export const useTasks = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const {tasks, isLoading, error} = useSelector(
-    (state: RootState) => state.tasks,
+  const dispatch = useAppDispatch();
+  const {tasks, isLoading, error} = useAppSelector(
+    (state) => state.tasks,
   );
-  const {user} = useSelector((state: RootState) => state.auth);
+  const {user} = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (!user) {
@@ -71,7 +71,6 @@ export const useTasks = () => {
         dispatch(setTasks(tasksData));
       },
       err => {
-        console.error('Error fetching tasks:', err);
         dispatch(setError(err.message));
       },
     );
@@ -110,7 +109,6 @@ export const useTasks = () => {
         NotificationService.scheduleTaskNotification(task);
       }
     } catch (err: unknown) {
-      console.error('Error adding task:', err);
       dispatch(setError((err as Error).message));
     }
   };
@@ -149,23 +147,18 @@ export const useTasks = () => {
         }
       }
     } catch (err: unknown) {
-      console.error('Error updating task:', err);
       dispatch(setError((err as Error).message));
     }
   };
 
   const deleteTask = async (taskId: string) => {
-    console.log('useTasks: deleteTask called for', taskId);
     try {
       const db = firebaseFirestore();
       const taskRef = doc(db, 'tasks', taskId);
-      console.log('useTasks: deleting doc', taskId);
       await deleteDoc(taskRef);
-      console.log('useTasks: doc deleted from firestore, dispatching action');
       dispatch(deleteTaskAction(taskId));
       NotificationService.cancelTaskNotification(taskId);
     } catch (err: unknown) {
-      console.error('Error deleting task:', err);
       dispatch(setError((err as Error).message));
     }
   };
@@ -197,7 +190,6 @@ export const useTasks = () => {
         updatedAt: Timestamp.fromDate(now),
       });
     } catch (err: unknown) {
-      console.error('Error toggling task:', err);
       dispatch(setError((err as Error).message));
     }
   };

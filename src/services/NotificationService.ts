@@ -23,7 +23,6 @@ class NotificationService {
       finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-      console.log('Failed to get push token for push notification!');
       return false;
     }
 
@@ -48,7 +47,6 @@ class NotificationService {
     const now = new Date();
 
     if (remindAtDate <= now) {
-      console.log('Reminder time is in the past, skipping scheduling');
       return;
     }
 
@@ -76,12 +74,10 @@ class NotificationService {
       identifier: task.id,
     });
 
-    console.log(`Notification scheduled for task ${task.id} at ${remindAtDate}`);
   }
 
   async cancelTaskNotification(taskId: string) {
     await Notifications.cancelScheduledNotificationAsync(taskId);
-    console.log(`Notification cancelled for task ${taskId}`);
   }
 }
 
